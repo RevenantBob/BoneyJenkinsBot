@@ -1,0 +1,9 @@
+{
+  "token": "TOKEN_HERE",
+  "servers": [
+    {
+      "server": "The Eternal Flame",
+      "monitor": [ "gurps-game", "gurps-in-character" ]
+    }
+  ]
+}
