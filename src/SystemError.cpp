@@ -5,6 +5,9 @@
 #ifdef LINUX
 #include <string.h>
 #endif
+#include <vector>
+#include <memory>
+
 std::string SystemError::ErrorMessage(uint32_t code)
 {
 #ifdef _MSC_VER

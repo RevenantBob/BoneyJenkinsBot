@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 std::string Format(const char* pszFormat, ...);
 std::wstring Format(const wchar_t* pszFormat, ...);

@@ -6,7 +6,37 @@
 #include <algorithm>
 #include <cwctype>
 #include <cctype>
+#ifdef _MSC_VER
 #include <Windows.h>
+#endif
+
+#ifdef LINUX
+#include <codecvt>
+#include <locale>
+#include <wchar.h>
+
+int _vscprintf (const char * format, va_list pargs)
+{
+    int retval;
+    va_list argcopy;
+    va_copy(argcopy, pargs);
+    retval = vsnprintf(NULL, 0, format, argcopy);
+    va_end(argcopy);
+    return retval;
+}
+
+int _vscwprintf (const wchar_t * format, va_list pargs)
+{
+    int retval;
+    va_list argcopy;
+    va_copy(argcopy, pargs);
+    retval = vswprintf(NULL, 0, format, argcopy);
+    va_end(argcopy);
+    return retval;
+}
+#define vsprintf_s vsnprintf
+#define vswprintf_s vswprintf
+#endif
 
 // printf format for wstring. Helper function.
 std::string Format(const char* pszFormat, ...)
@@ -60,6 +90,7 @@ std::wstring Format(const wchar_t* pszFormat, ...)
 
 std::string UTF16ToUTF8(const std::wstring& str)
 {
+#ifdef _MSC_VER
     int len = ::WideCharToMultiByte(CP_UTF8, 0, str.c_str(), (int)str.size(), nullptr, 0, nullptr, nullptr);
     if (len < 1)
     {
@@ -75,10 +106,17 @@ std::string UTF16ToUTF8(const std::wstring& str)
     }
 
     return std::string(buffer.begin(), buffer.end());
+#endif
+
+#ifdef LINUX
+  std::wstring_convert< std::codecvt_utf8<wchar_t>, wchar_t > convert;
+  return convert.to_bytes( str );
+#endif
 }
 
 std::wstring UTF8ToUTF16(const std::string& str)
 {
+#ifdef _MSC_VER
     int len = ::MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), nullptr, 0);
     if (len < 1)
     {
@@ -94,7 +132,11 @@ std::wstring UTF8ToUTF16(const std::string& str)
     }
 
     return std::wstring(buffer.begin(), buffer.end());
-
+#endif
+#ifdef LINUX
+  std::wstring_convert< std::codecvt_utf8<wchar_t>, wchar_t > convert;
+  return convert.from_bytes( str );
+#endif
 }
 
 std::vector<std::wstring> SpliceString(const std::wstring& source, wchar_t delim)
@@ -160,6 +202,7 @@ std::wstring ToUpper(const std::wstring& source)
 
 std::vector<uint8_t> UTF16ToUTF8Bytes(const std::wstring& str)
 {
+#ifdef _MSC_VER
     int len = ::WideCharToMultiByte(CP_UTF8, 0, str.c_str(), (int)str.size(), nullptr, 0, nullptr, nullptr);
     if (len < 1)
     {
@@ -175,4 +218,5 @@ std::vector<uint8_t> UTF16ToUTF8Bytes(const std::wstring& str)
     }
 
     return buffer;
+#endif
 }
