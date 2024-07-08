@@ -2,8 +2,12 @@
   "token": "TOKEN_HERE",
   "servers": [
     {
-      "server": "The Eternal Flame",
-      "monitor": [ "gurps-game", "gurps-in-character" ]
+      "server": "Cyclopean Philosophy",
+      "monitor": [ "general", "in-character", "gm-cues", "out-of-character" ]
+    },
+    {
+      "server": "In GURPS We Trust",
+      "monitor": [ "out-of-character", "in-character", "gm-prompts" ]
     }
   ]
 }

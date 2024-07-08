@@ -340,7 +340,7 @@ std::string Bot::TalkShit(const std::string& from, RollResult result)
             case 2: return "Ya did good, kid. Real good. But you\'ll always be second best as long as I\'m around, see?";
             case 3: return "That\'s right. Show 'em how it\'s done.";
             case 4: return "They\'s heatin\' up.";
-            case 5: return "My *****! ... ... ****. Why can't I say *****!? **** this censor shit!";
+            case 5: return "My $$$$$$! ... ... $$$$$$! Why can't I say $$$$$$!? $$$$ this censor $$$$!";
             case 6: return "Fo' sheezy my neezy!";
             default: return "Congratulations.";
             }
