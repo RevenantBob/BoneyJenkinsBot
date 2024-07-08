@@ -2,6 +2,7 @@
 #include <optional>
 #include <string>
 #include <format>
+#include <cstdint>
 
 class SystemError
 {

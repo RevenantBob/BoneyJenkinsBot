@@ -1,6 +1,8 @@
 #pragma once
+#include <exception>
 #include <functional>
 #include <optional>
+#include <exception>
 #include "Format.h"
 
 struct Unit
@@ -48,7 +50,7 @@ public:
         {
             if (error.has_value())
             {
-                throw std::exception("both result and error set");
+                throw std::runtime_error("both result and error set");
             }
 
             m_bResult = true;
@@ -71,7 +73,7 @@ public:
         {
             if (error.has_value())
             {
-                throw std::exception("both result and error set");
+                throw std::runtime_error("both result and error set");
             }
 
             m_bResult = true;
@@ -131,7 +133,7 @@ public:
     {
         if (!m_bResult.has_value())
         {
-            throw new std::exception("attempt to access a null result");
+            throw std::runtime_error("attempt to access a null result");
         }
 
         return m_bResult.value();
@@ -251,7 +253,7 @@ public:
     {
         if (!m_bResult.has_value())
         {
-            throw std::exception("result not set");
+            throw std::runtime_error("result not set");
         }
 
 
@@ -276,7 +278,7 @@ public:
     {
         if (!m_bResult.has_value())
         {
-            throw std::exception("result not set");
+            throw std::runtime_error("result not set");
         }
 
         std::optional<R> result;
@@ -300,7 +302,7 @@ public:
     {
         if (!m_bResult.has_value())
         {
-            throw std::exception("result not set");
+            throw std::runtime_error("result not set");
         }
 
         std::optional<R> result;
@@ -317,7 +319,7 @@ public:
     {
         if (!m_bResult.has_value())
         {
-            throw std::exception("result not set");
+            throw std::runtime_error("result not set");
         }
 
         if (m_bResult.value() == false)
@@ -333,7 +335,7 @@ public:
     {
         if (!m_bResult.has_value())
         {
-            throw std::exception("result not set");
+            throw std::runtime_error("result not set");
         }
 
         if (m_bResult.value() == false)
